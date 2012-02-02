@@ -5,6 +5,7 @@ queue:create("queue1"),
 queue:push("queue1", <a/>),
 queue:push("queue1", <b/>),
 queue:pop("queue1"),
+queue:create("queue1"),
 queue:push("queue1", <c/>),
 queue:push("queue1", <d/>),
 queue:pop("queue1")

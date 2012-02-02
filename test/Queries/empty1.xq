@@ -1,10 +1,13 @@
 import module namespace queue = "http://www.zorba-xquery.com/modules/store/data-structures/queue";
 
-declare variable $quname as xs:QName := fn:QName("http://queue-example.zorba-xquery.com", "queue1");
 (
-queue:push($quname, <a/>),
-queue:push($quname, <b/>),
-queue:empty($quname),
-queue:delete($quname),
-queue:empty($quname)
+queue:create("queue1"),
+queue:push("queue1", <a/>),
+queue:push("queue1", <b/>),
+queue:empty("queue1"),
+queue:pop("queue1"),
+queue:pop("queue1"),
+queue:empty("queue1"),
+queue:delete("queue1"),
+queue:empty("queue1")
 )
