@@ -17,7 +17,7 @@ xquery version "3.0";
 :)
 
 (:~
- : Implementation of queue for node items, using collections data structures.
+ : Implementation of queue for node items, using collections data structures.<br />
  : Queues are created at first node insert.
  :
  : @author Daniel Turcanu
@@ -33,14 +33,13 @@ declare namespace ver = "http://www.zorba-xquery.com/options/versioning";
 declare option ver:module-version "1.0";
 
 (:~
- : URI for all collections QNames. Queue names are combined with this URI to construct
- : QNames used by collection api. <br/>
+ : URI for all collections QNames. Queue names are combined with this URI to construct QNames used by collection api.
  : The URI is "http://www.zorba-xquery.com/modules/store/data-structures/queue".
  :)
 declare variable $queue:global-uri := "http://www.zorba-xquery.com/modules/store/data-structures/queue";
 
 (:~
- : Create a queue with this name. If queue exists, it is deleted first.
+ : Create a queue with this name. <br /> If queue exists, it is deleted first.
  : @param $name string name of the new queue
 :)
 declare %ann:sequential function queue:create($name as xs:string)
@@ -178,8 +177,8 @@ declare %ann:sequential function queue:delete($name as xs:string)
 };
 
 (:~
- : Copy all nodes from source queue to a destination queue.
- : If destination queue does not exist, it is created first.
+ : Copy all nodes from source queue to a destination queue.<br />
+ : If destination queue does not exist, it is created first. <br />
  : If destination queue is not empty, the nodes are appended last.
  : @param $destname string name of the destination queue
  : @param $sourcename string name of the source queue
