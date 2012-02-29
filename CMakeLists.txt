@@ -22,6 +22,6 @@ FIND_PACKAGE (Zorba REQUIRED HINTS "${ZORBA_BUILD_DIR}")
 INCLUDE ("${Zorba_USE_FILE}")
 
 
-ADD_SUBDIRECTORY("src/com/zorba-xquery/www/modules/store/data-structures")
+ADD_SUBDIRECTORY("src")
 
 DONE_DECLARING_ZORBA_URIS()

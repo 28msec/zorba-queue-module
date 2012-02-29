@@ -1,7 +1,8 @@
 import module namespace queue = "http://www.zorba-xquery.com/modules/store/data-structures/queue";
 
-queue:create("queue1");
-queue:push("queue1", <a/>);
-queue:push("queue1", <b/>);
-queue:delete("queue1");
+variable $name := fn:QName("", "queue1");
+queue:create($name);
+queue:push($name, <a/>);
+queue:push($name, <b/>);
+queue:delete($name);
 queue:available-queues()
