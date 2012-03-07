@@ -35,7 +35,8 @@ declare option ver:module-version "1.0";
 (:~
  : Create a queue with this name. <br /> If queue exists, it is deleted first.
  : @param $name name of the new queue.
-:)
+ : @return ()
+ :)
 declare %ann:sequential function queue:create( $name as xs:QName )
 {
   queue:delete($name);
@@ -46,7 +47,7 @@ declare %ann:sequential function queue:create( $name as xs:QName )
  : Return a list of xs:QNames for available queues.
  : @return the list of created queue names.
  : @example test/Queries/available1.xq
-:)
+ :)
 declare function queue:available-queues() as xs:QName*
 {
   for $collQname in collections-ddl:available-collections()
@@ -58,7 +59,7 @@ declare function queue:available-queues() as xs:QName*
  : @param $name name of the queue.
  : @return the first node, or empty sequence if queue is empty.
  : @example test/Queries/front1.xq
-:)
+ :)
 declare function queue:front($name as xs:QName) as node()?
 {
   let $queueContent := collections-dml:collection($name)
@@ -74,7 +75,7 @@ declare function queue:front($name as xs:QName) as node()?
  : @param $name name of the queue.
  : @return the last node, or empty sequence if queue is empty.
  : @example test/Queries/back1.xq
-:)
+ :)
 declare function queue:back($name as xs:QName) as node()?
 {
   let $queueContent := collections-dml:collection($name)
@@ -90,7 +91,7 @@ declare function queue:back($name as xs:QName) as node()?
  : @param $name name of the queue.
  : @return the first node, or empty sequence if queue is empty.
  : @example test/Queries/pop2.xq
-:)
+ :)
 declare %ann:sequential function queue:pop($name as xs:QName) as node()?
 {
   let $queueContent := collections-dml:collection($name)
@@ -109,8 +110,9 @@ declare %ann:sequential function queue:pop($name as xs:QName) as node()?
  : Add a new node to the queue.
  : @param $name name of the queue.
  : @param $value the node to be added.
+ : @return ()
  : @example test/Queries/push1.xq
-:)
+ :)
 declare %ann:sequential function queue:push($name as xs:QName, $value as node())
 {
   collections-dml:apply-insert-nodes-last($name, $value);
@@ -121,7 +123,7 @@ declare %ann:sequential function queue:push($name as xs:QName, $value as node())
  : @param $name name of the queue.
  : @return true is the queue is empty or does not exist.
  : @example test/Queries/empty1.xq
-:)
+ :)
 declare function queue:empty($name as xs:QName) as xs:boolean
 {
   if(collections-ddl:is-available-collection($name)) then
@@ -135,7 +137,7 @@ declare function queue:empty($name as xs:QName) as xs:boolean
  : @param $name name of the queue.
  : @return the count of nodes.
  : @example test/Queries/size1.xq
-:)
+ :)
 declare function queue:size($name as xs:QName) as xs:integer
 {
   fn:count(collections-dml:collection($name))
@@ -144,8 +146,9 @@ declare function queue:size($name as xs:QName) as xs:integer
 (:~
  : Remove the queue with all the nodes in it.
  : @param $name name of the queue.
+ : @return ()
  : @example test/Queries/delete1.xq
-:)
+ :)
 declare %ann:sequential function queue:delete($name as xs:QName)
 {
   if(collections-ddl:is-available-collection($name)) then
@@ -165,8 +168,9 @@ declare %ann:sequential function queue:delete($name as xs:QName)
  : If destination queue is not empty, the nodes are appended last.
  : @param $destName name of the destination queue.
  : @param $sourceName name of the source queue.
+ : @return ()
  : @example test/Queries/copy1.xq
-:)
+ :)
 declare %ann:sequential function queue:copy($destName as xs:QName, $sourceName as xs:QName)
 {
   if(fn:not(collections-ddl:is-available-collection($destName))) then
@@ -175,4 +179,3 @@ declare %ann:sequential function queue:copy($destName as xs:QName, $sourceName a
     ();
   collections-dml:insert-nodes-last($destName, collections-dml:collection($sourceName));
 };
-
