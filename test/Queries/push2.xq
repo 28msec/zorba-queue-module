@@ -6,8 +6,8 @@ variable $name := fn:QName("", "queue1");
   queue:push($name, <a/>),
   queue:push($name, <b/>),
   queue:pop($name),
-  queue:create($name),
   queue:push($name, <c/>),
   queue:push($name, <d/>),
+  queue:pop($name),
   queue:pop($name)
 )

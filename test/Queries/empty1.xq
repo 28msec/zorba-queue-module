@@ -9,6 +9,5 @@ variable $name := fn:QName("", "queue1");
   queue:pop($name),
   queue:pop($name),
   queue:empty($name),
-  queue:delete($name),
-  queue:empty($name)
+  queue:delete($name)
 )
