@@ -177,8 +177,7 @@ declare %ann:sequential function queue:delete($name as xs:QName)
 {
   if(collections-ddl:is-available-collection($name)) then
   {
-    variable $queueSize := queue:size($name);
-    collections-dml:delete-nodes-first($name, $queueSize);
+    collections-dml:delete-nodes-first($name, queue:size($name));
     collections-ddl:delete($name);
     ()
   }
