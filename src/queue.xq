@@ -17,8 +17,12 @@ xquery version "3.0";
 :)
 
 (:~
- : Implementation of queue for node items, using collections data structures.<br />
- : Queues are created at first node insert.
+ : Implementation of queue for node items, using dynamic collections.<br />
+ : Please refer to our documentation for <a href="../../html/data_lifecycle.html">more information</a> 
+ : about the lifecycle management and the manipulation of such collections.<br />
+ : Please note that for listing the available stacks and also deleting a stack the functions in the 
+ : <a href="www.zorba-xquery.com_modules_store_dynamic_collections_ddl.html">http://www.zorba-xquery.com/modules/store/dynamic/collections/ddl</a>
+ : should be used.
  :
  : @author Daniel Turcanu
  : @project store/data structures
@@ -59,16 +63,6 @@ declare %ann:sequential function queue:create($name as xs:QName)
     fn:error($queue:errExists, "Queue already exists.");
   else
     collections-ddl:create($name);
-};
-
-(:~
- : Return a list of xs:QNames for available queues.
- : @return the list of created queue names.
- : @example test/Queries/available1.xq
- :)
-declare function queue:available-queues() as xs:QName*
-{
-  collections-ddl:available-collections()
 };
 
 (:~
@@ -164,25 +158,6 @@ declare function queue:size($name as xs:QName) as xs:integer
     fn:error($queue:errNA, "Queue does not exist.")
   else
     fn:count(collections-dml:collection($name))
-};
-
-(:~
- : Remove the queue with all the nodes in it.
- : @param $name name of the queue.
- : @return ()
- : @example test/Queries/delete1.xq
- : @error queue:errNA if the queue identified by $name does not exist.
- :)
-declare %ann:sequential function queue:delete($name as xs:QName)
-{
-  if(collections-ddl:is-available-collection($name)) then
-  {
-    collections-dml:delete-nodes-first($name, queue:size($name));
-    collections-ddl:delete($name);
-    ()
-  }
-  else
-    fn:error($queue:errNA, "Queue does not exist.")
 };
 
 (:~

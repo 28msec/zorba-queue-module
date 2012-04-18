@@ -1,6 +1,9 @@
 import module namespace queue = "http://www.zorba-xquery.com/modules/store/data-structures/queue";
+import module namespace collections-ddl = "http://www.zorba-xquery.com/modules/store/dynamic/collections/ddl";
+import module namespace collections-dml = "http://www.zorba-xquery.com/modules/store/dynamic/collections/dml";
 
 variable $name := fn:QName("", "queue1");
+
 (
   queue:create($name),
   queue:push($name, <a/>),
@@ -9,5 +12,9 @@ variable $name := fn:QName("", "queue1");
   queue:pop($name),
   queue:pop($name),
   queue:empty($name),
-  queue:delete($name)
-)
+  {
+    collections-dml:delete-nodes-first($name, queue:size($name));
+    collections-ddl:delete($name);
+    ()
+  }
+)  
