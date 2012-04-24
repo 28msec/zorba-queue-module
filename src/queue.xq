@@ -52,7 +52,7 @@ declare variable $queue:errExists as xs:QName := fn:QName($queue:errNS, "queue:e
  : @return ()
  : @error queue:errExists if the queue identified by $name already exists.
  :)
-declare %ann:sequential function queue:create($name as xs:QName) as none
+declare %ann:sequential function queue:create($name as xs:QName) as empty
 {
   if(collections-ddl:is-available-collection($name)) then
     fn:error($queue:errExists, "Queue already exists.");
@@ -117,7 +117,7 @@ declare %ann:sequential function queue:pop($name as xs:QName) as node()?
  : @example test/Queries/push1.xq
  : @error queue:errNA if the queue identified by $name does not exist.
  :)
-declare %ann:sequential function queue:push($name as xs:QName, $value as node()) as none
+declare %ann:sequential function queue:push($name as xs:QName, $value as node()) as empty
 {
   if(not(collections-ddl:is-available-collection($name))) then
     fn:error($queue:errNA, "Queue does not exist.");
@@ -164,7 +164,7 @@ declare function queue:size($name as xs:QName) as xs:integer
  : @return ()
  : @example test/Queries/copy1.xq
  :)
-declare %ann:sequential function queue:copy($destName as xs:QName, $sourceName as xs:QName) as none
+declare %ann:sequential function queue:copy($destName as xs:QName, $sourceName as xs:QName) as empty
 {
   if(fn:not(collections-ddl:is-available-collection($destName))) then
     collections-ddl:create($destName);
