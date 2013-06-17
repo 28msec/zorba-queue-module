@@ -20,7 +20,7 @@ xquery version "3.0";
  : Implementation of queue for node items, using dynamic collections.<br />
  :
  : @author Daniel Turcanu, Sorin Nasoi
- : @project store/data structures
+ : @project Zorba/Data Store/Data Structures/Queue
  :)
 module namespace queue = "http://www.zorba-xquery.com/modules/store/data-structures/queue";
 
