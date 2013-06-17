@@ -17,12 +17,12 @@ xquery version "3.0";
 :)
 
 (:~
- : Implementation of queue for node items, using dynamic collections.<br />
+ : <p> Implementation of queue for node items, using dynamic collections.<p/>
  :
  : @author Daniel Turcanu, Sorin Nasoi
  : @project Zorba/Data Store/Data Structures/Queue
  :)
-module namespace queue = "http://www.zorba-xquery.com/modules/store/data-structures/queue";
+module namespace queue = "http://zorba.io/modules/queue";
 
 import module namespace collections-ddl = "http://www.zorba-xquery.com/modules/store/dynamic/collections/ddl";
 import module namespace collections-dml = "http://www.zorba-xquery.com/modules/store/dynamic/collections/dml";
@@ -34,7 +34,7 @@ declare option ver:module-version "1.0";
 (:~
  : Errors namespace URI.
 :)
-declare variable $queue:errNS as xs:string := "http://www.zorba-xquery.com/modules/store/data-structures/queue";
+declare variable $queue:errNS as xs:string := "http://zorba.io/modules/queue";
  
 (:~
  : xs:QName with namespace URI="http://www.zorba-xquery.com/modules/store/data-structures/queue" and local name "errNA"
@@ -47,9 +47,10 @@ declare variable $queue:errNA as xs:QName := fn:QName($queue:errNS, "queue:errNA
 declare variable $queue:errExists as xs:QName := fn:QName($queue:errNS, "queue:errExists");
 
 (:~
- : Create a queue with this name. <br /> If queue exists, an error is raised.
+ : <p> Create a queue with the name given. If a queue with the given name already exists, an error is raised. <p/>
+ :
  : @param $name name of the new queue.
- : @return ()
+ : @return an empty sequence.
  : @error queue:errExists if the queue identified by $name already exists.
  :)
 declare %ann:sequential function queue:create($name as xs:QName) as empty-sequence()
@@ -61,7 +62,8 @@ declare %ann:sequential function queue:create($name as xs:QName) as empty-sequen
 };
 
 (:~
- : Return the first node in the queue (the first added), without removing it.
+ : <p> Return the first node in the queue (the first added), without removing it. <p/>
+ :
  : @param $name name of the queue.
  : @return the first node, or empty sequence if queue is empty.
  : @example test/Queries/front1.xq
@@ -76,7 +78,8 @@ declare function queue:front($name as xs:QName) as node()?
 };
 
 (:~
- : Return the last node in the queue (the last added), without removing it.
+ : <p> Return the last node in the queue (the last added), without removing it. <p/>
+ :
  : @param $name name of the queue.
  : @return the last node, or empty sequence if queue is empty.
  : @example test/Queries/back1.xq
@@ -91,7 +94,8 @@ declare function queue:back($name as xs:QName) as node()?
 };
 
 (:~
- : Return the first node in the queue, and remove it.
+ : <p> Return the first node in the queue, and remove it. <p/>
+ :
  : @param $name name of the queue.
  : @return the first node, or empty sequence if queue is empty.
  : @example test/Queries/pop2.xq
@@ -110,7 +114,8 @@ declare %ann:sequential function queue:pop($name as xs:QName) as node()?
 };
 
 (:~
- : Add a new node to the queue; the queue will contain a copy of the given node.
+ : <p> Add a new node to the queue; the queue will contain a copy of the given node. <p/>
+ :
  : @param $name name of the queue.
  : @param $value the node to be added.
  : @return ()
@@ -126,9 +131,10 @@ declare %ann:sequential function queue:push($name as xs:QName, $value as node())
 };
 
 (:~
- : Checks if a queue exists and is empty.
+ : <p> Checks if a queue exists and is empty. <p/>
+ :
  : @param $name name of the queue.
- : @return true is the queue is empty or does not exist.
+ : @return true is the queue is empty, false if it is not empty.
  : @example test/Queries/empty1.xq
  : @error queue:errNA if the queue identified by $name does not exist.
  :)
@@ -141,7 +147,8 @@ declare function queue:empty($name as xs:QName) as xs:boolean
 };
 
 (:~
- : Count of nodes in the queue.
+ : <p> Count of nodes in the queue. <p/>
+ :
  : @param $name name of the queue.
  : @return the count of nodes.
  : @example test/Queries/size1.xq
@@ -156,12 +163,13 @@ declare function queue:size($name as xs:QName) as xs:integer
 };
 
 (:~
- : Copy all nodes from source queue to a destination queue.<br />
- : If destination queue does not exist, it is created first. <br />
- : If destination queue is not empty, the nodes are appended last.
+ : <p> Copy all nodes from source queue to a destination queue.
+ : If destination queue does not exist, it is created first.
+ : If destination queue is not empty, the nodes are appended last. <p/>
+ :
  : @param $destName name of the destination queue.
  : @param $sourceName name of the source queue.
- : @return ()
+ : @return an empty sequence.
  : @example test/Queries/copy1.xq
  :)
 declare %ann:sequential function queue:copy($destName as xs:QName, $sourceName as xs:QName) as empty-sequence()
