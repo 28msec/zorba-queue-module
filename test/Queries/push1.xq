@@ -1,4 +1,4 @@
-import module namespace queue = "http://www.zorba-xquery.com/modules/store/data-structures/queue";
+import module namespace queue = "http://zorba.io/modules/queue";
 
 variable $name := fn:QName("", "queue1");
 (

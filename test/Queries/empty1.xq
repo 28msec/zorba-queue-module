@@ -1,4 +1,4 @@
-import module namespace queue = "http://www.zorba-xquery.com/modules/store/data-structures/queue";
+import module namespace queue = "http://zorba.io/modules/queue";
 import module namespace collections-ddl = "http://www.zorba-xquery.com/modules/store/dynamic/collections/ddl";
 import module namespace collections-dml = "http://www.zorba-xquery.com/modules/store/dynamic/collections/dml";
 
