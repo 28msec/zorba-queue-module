@@ -108,7 +108,7 @@ declare %ann:sequential function queue:pop($name as xs:QName) as structured-item
   else
   {
     variable $topNode := collections-dml:collection($name)[1];
-    collections-dml:delete-node-first($name);
+    collections-dml:delete-first($name);
     $topNode
   }
 };
@@ -127,7 +127,7 @@ declare %ann:sequential function queue:push($name as xs:QName, $value as structu
   if(not(collections-ddl:is-available-collection($name))) then
     fn:error($queue:NOT-EXISTS, "Queue does not exist.");
   else
-    collections-dml:apply-insert-nodes-last($name, $value);
+    collections-dml:apply-insert-last($name, $value);
 };
 
 (:~
@@ -178,5 +178,5 @@ declare %ann:sequential function queue:copy($destName as xs:QName, $sourceName a
     collections-ddl:create($destName);
   else
     ();
-  collections-dml:insert-nodes-last($destName, collections-dml:collection($sourceName));
+  collections-dml:insert-last($destName, collections-dml:collection($sourceName));
 };
