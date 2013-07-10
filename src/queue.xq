@@ -31,20 +31,11 @@ declare namespace ann = "http://www.zorba-xquery.com/annotations";
 declare namespace ver = "http://www.zorba-xquery.com/options/versioning";
 declare option ver:module-version "1.0";
 
-(:~
- : Errors namespace URI.
-:)
-declare variable $queue:ERR-NS as xs:string := "http://zorba.io/modules/queue";
+declare %private variable $queue:ERR-NS as xs:string := "http://zorba.io/modules/queue";
  
-(:~
- : xs:QName with namespace URI="http://www.zorba-xquery.com/modules/store/data-structures/queue" and local name "NOT-EXISTS"
-:)
-declare variable $queue:NOT-EXISTS as xs:QName := fn:QName($queue:ERR-NS, "queue:NOT-EXISTS");
+declare %private variable $queue:NOT-EXISTS as xs:QName := fn:QName($queue:ERR-NS, "queue:NOT-EXISTS");
 
-(:~
- : xs:QName with namespace URI="http://www.zorba-xquery.com/modules/store/data-structures/queue" and local name "EXISTS"
-:)
-declare variable $queue:EXISTS as xs:QName := fn:QName($queue:ERR-NS, "queue:EXISTS");
+declare %private variable $queue:EXISTS as xs:QName := fn:QName($queue:ERR-NS, "queue:EXISTS");
 
 (:~
  : Create a queue with the name given. If a queue with the given name already exists, an error is raised. <p/>
