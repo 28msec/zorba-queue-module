@@ -17,7 +17,7 @@ xquery version "3.0";
 :)
 
 (:~
- : Implementation of queue for node items, using dynamic collections.<p/>
+ : Implementation of queue for item items, using dynamic collections.<p/>
  :
  : @author Daniel Turcanu, Sorin Nasoi
  : @project Zorba/Data Store/Data Structures/Queue
@@ -53,10 +53,10 @@ declare %ann:sequential function queue:create($name as xs:QName) as empty-sequen
 };
 
 (:~
- : Return the first node in the queue (the first added), without removing it. <p/>
+ : Return the first item in the queue (the first added), without removing it. <p/>
  :
  : @param $name name of the queue.
- : @return the first node, or empty sequence if queue is empty.
+ : @return the first item, or empty sequence if queue is empty.
  : @example test/Queries/front1.xq
  : @error queue:NOT-EXISTS if the queue identified by $name does not exist.
  :)
@@ -69,10 +69,10 @@ declare function queue:front($name as xs:QName) as structured-item()?
 };
 
 (:~
- : Return the last node in the queue (the last added), without removing it. <p/>
+ : Return the last item in the queue (the last added), without removing it. <p/>
  :
  : @param $name name of the queue.
- : @return the last node, or empty sequence if queue is empty.
+ : @return the last item, or empty sequence if queue is empty.
  : @example test/Queries/back1.xq
  : @error queue:NOT-EXISTS if the queue identified by $name does not exist.
  :)
@@ -85,10 +85,10 @@ declare function queue:back($name as xs:QName) as structured-item()?
 };
 
 (:~
- : Return the first node in the queue, and remove it. <p/>
+ : Return the first item in the queue, and remove it. <p/>
  :
  : @param $name name of the queue.
- : @return the first node, or empty sequence if queue is empty.
+ : @return the first item, or empty sequence if queue is empty.
  : @example test/Queries/pop2.xq
  : @error queue:NOT-EXISTS if the queue identified by $name does not exist.
  :)
@@ -98,17 +98,17 @@ declare %ann:sequential function queue:pop($name as xs:QName) as structured-item
     fn:error($queue:NOT-EXISTS, "Queue does not exist.")
   else
   {
-    variable $topNode := collections-dml:collection($name)[1];
+    variable $topItem := collections-dml:collection($name)[1];
     collections-dml:delete-first($name);
-    $topNode
+    $topItem
   }
 };
 
 (:~
- : Add a new node to the queue; the queue will contain a copy of the given node. <p/>
+ : Add a new item to the queue; the queue will contain a copy of the given item. <p/>
  :
  : @param $name name of the queue.
- : @param $value the node to be added.
+ : @param $value the item to be added.
  : @return ()
  : @example test/Queries/push1.xq
  : @error queue:NOT-EXISTS if the queue identified by $name does not exist.
@@ -138,10 +138,10 @@ declare function queue:empty($name as xs:QName) as xs:boolean
 };
 
 (:~
- : Count of nodes in the queue. <p/>
+ : Count of items in the queue. <p/>
  :
  : @param $name name of the queue.
- : @return the count of nodes.
+ : @return the count of items.
  : @example test/Queries/size1.xq
  : @error queue:NOT-EXISTS if the queue identified by $name does not exist.
  :)
@@ -154,9 +154,9 @@ declare function queue:size($name as xs:QName) as xs:integer
 };
 
 (:~
- : Copy all nodes from source queue to a destination queue. <p/>
+ : Copy all items from source queue to a destination queue. <p/>
  : If destination queue does not exist, it is created first. <p/>
- : If destination queue is not empty, the nodes are appended last. <p/>
+ : If destination queue is not empty, the items are appended last. <p/>
  :
  : @param $destName name of the destination queue.
  : @param $sourceName name of the source queue.
