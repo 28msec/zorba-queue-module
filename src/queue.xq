@@ -17,7 +17,10 @@ xquery version "3.0";
 :)
 
 (:~
- : Implementation of queue for item items, using dynamic collections.<p/>
+ : Implementation of queue for items, using dynamic collections.<p/>
+ :
+ : Entries in the queue must be structured items - that is, either JSON
+ : Objects or Arrays, or XML Nodes. <p/>
  :
  : @author Daniel Turcanu, Sorin Nasoi
  : @project Zorba/Data Store/Data Structures/Queue
