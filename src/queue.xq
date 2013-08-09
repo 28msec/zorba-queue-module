@@ -30,8 +30,8 @@ module namespace queue = "http://zorba.io/modules/queue";
 import module namespace collections-ddl = "http://www.zorba-xquery.com/modules/store/dynamic/collections/ddl";
 import module namespace collections-dml = "http://www.zorba-xquery.com/modules/store/dynamic/collections/dml";
 
-declare namespace ann = "http://www.zorba-xquery.com/annotations";
-declare namespace ver = "http://www.zorba-xquery.com/options/versioning";
+declare namespace ann = "http://zorba.io/annotations";
+declare namespace ver = "http://zorba.io/options/versioning";
 declare option ver:module-version "1.0";
 
 declare %private variable $queue:ERR-NS as xs:string := "http://zorba.io/modules/queue";
